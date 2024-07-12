@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Form</title>
     <link rel="stylesheet" href="style.css">
+    <script>
+        function validateUsername() {
+            const username = document.getElementById("username").value;
+            const regex = /^[a-zA-Z]+$/;
+            if (!regex.test(username)) {
+                alert("Username must only contain letters.");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </head>
 <body>
     <div class="container">
