@@ -26,6 +26,45 @@
             </div>
         </form>
     </div>
+    <script>
+        function validateForm() {
+            let name = document.getElementById('name').value;
+            let username = document.getElementById('username').value;
+            let password = document.getElementById('password').value;
+        
+            if (name.length < 3) {
+                alert("Name must be at least 3 characters long.");
+                return false;
+            }
+            
+            if (username.length < 3) {
+                alert("Username must be at least 5 characters long.");
+                return false;
+            }
+            
+            if (password.length < 8) {
+                alert("Password must be at least 8 characters long.");
+                return false;
+            }
+            
+            if (!/[A-Z]/.test(password)) {
+                alert("Password must contain at least one uppercase letter.");
+                return false;
+            }
+            
+            if (!/[a-z]/.test(password)) {
+                alert("Password must contain at least one lowercase letter.");
+                return false;
+            }
+            
+            if (!/[0-9]/.test(password)) {
+                alert("Password must contain at least one number.");
+                return false;
+            }
+            
+            return true;
+        }
+    </script>
 
     
 </body>
