@@ -1,5 +1,4 @@
-markdown
-Copy code
+
 # User Registration and Login System
 
 This project is a simple user registration and login system using HTML, CSS, JavaScript, PHP, and MySQL. The system allows users to register with their details and then log in to the system. Upon successful login, users are welcomed, and if login fails, an alert is shown.
