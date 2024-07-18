@@ -19,10 +19,14 @@
 </head>
 <body>
     <div class="container">
-        <form action="login.php" method="post">
+        <form action="login.php" method="post" onsubmit="return validateUsername()">
             <h2>Login</h2>
-            <label for="user_account">User Account:</label>
-            <input type="text" id="user_account" name="user_account" required>
+            <label for="user_account">User Account:</label><br>
+            <select id="user_account" name="user_account" required>
+                <option value="student">Student</option>
+                <option value="lecturer">Lecturer</option>
+                <option value="admin">Admin</option>
+            </select><br>
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
             <label for="password">Password:</label>
