@@ -1,10 +1,28 @@
 <?php
 session_start();
+
+// Redirect to login if user is not logged in or is not an admin
 if (!isset($_SESSION['user_account']) || $_SESSION['user_account'] !== 'admin') {
     header('Location: login.html');
     exit;
 }
+
+// Simulated admin data (replace with actual data fetching logic)
+$adminData = [
+    'username' => isset($_SESSION['username']) ? $_SESSION['username'] : 'Admin',
+    'userStats' => [
+        'students' => 120,
+        'lecturers' => 15,
+        'courses' => 25,
+    ],
+    'recentActivity' => [
+        ['timestamp' => '2024-07-17 14:23', 'action' => 'User John Doe logged in.'],
+        ['timestamp' => '2024-07-17 15:02', 'action' => 'Course "Introduction to PHP" updated.'],
+    ],
+];
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,75 +30,146 @@ if (!isset($_SESSION['user_account']) || $_SESSION['user_account'] !== 'admin') 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Page</title>
-    <link rel="stylesheet">
     <style>
-    /* Resetting default margin and padding */
-    body,
-    h1,
-    p,
-    ul {
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f8f9fa;
         margin: 0;
         padding: 0;
     }
 
-    /* Basic styles */
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f0f0f0;
-        line-height: 1.6;
-    }
-
     .container {
-        max-width: 800px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #fff;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        border-radius: 5px;
+
+        padding: 2%;
+        background: #fff;
+
     }
 
     h1 {
-        font-size: 2em;
-        color: #333;
-        margin-bottom: 20px;
+        color: #007bff;
         text-align: center;
     }
 
-    p {
-        font-size: 1.2em;
-        color: #666;
-        margin-bottom: 15px;
+    .section {
+        margin-bottom: 20px;
     }
 
-    ul {
-        list-style-type: none;
-        margin-top: 20px;
-    }
-
-    ul li {
+    .section h2 {
+        border-bottom: 2px solid #007bff;
+        padding-bottom: 10px;
         margin-bottom: 10px;
+        color: #007bff;
     }
 
-    ul li a {
+    .section p {
+        margin: 5px 0;
+    }
+
+    .stats {
+        display: flex;
+        justify-content: space-around;
+        text-align: center;
+    }
+
+    .stats div {
+        background: #f1f1f1;
+        padding: 15px;
+        border-radius: 4px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .recent-activity {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .recent-activity li {
+        padding: 10px;
+        background: #f8f9fa;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .recent-activity li:last-child {
+        border-bottom: none;
+    }
+
+    .footer {
+        margin-top: 20px;
+        text-align: center;
+        color: #888;
+    }
+
+    .footer a {
+        color: #888;
+        text-decoration: none;
+    }
+
+    .footer a:hover {
+        text-decoration: underline;
+    }
+
+    .nav-links {
+        text-align: center;
+        margin: 20px 0;
+    }
+
+    .nav-links a {
         text-decoration: none;
         color: #007bff;
         font-weight: bold;
+        margin: 0 15px;
     }
 
-    ul li a:hover {
+    .nav-links a:hover {
         text-decoration: underline;
-        color: #0056b3;
     }
     </style>
 </head>
 
 <body>
-    <h1>Welcome, Admin <?php echo htmlspecialchars($_SESSION['username']); ?>!</h1>
-    <p>This is the admin page. You can access all other pages:</p>
-    <ul>
-        <li><a href="student.php">Student Page</a></li>
-        <li><a href="lecturer.php">Lecturer Page</a></li>
-    </ul>
+    <div class="container">
+        <h1>Welcome, Admin <?php echo htmlspecialchars($adminData['username']); ?>!</h1>
+
+        <div class="nav-links">
+            <a href="student.php">Student Page</a>
+            <a href="lecturer.php">Lecturer Page</a>
+
+        </div>
+
+        <div class="section">
+            <h2>System Statistics</h2>
+            <div class="stats">
+                <div>
+                    <h3><?php echo htmlspecialchars($adminData['userStats']['students']); ?></h3>
+                    <p>Students</p>
+                </div>
+                <div>
+                    <h3><?php echo htmlspecialchars($adminData['userStats']['lecturers']); ?></h3>
+                    <p>Lecturers</p>
+                </div>
+                <div>
+                    <h3><?php echo htmlspecialchars($adminData['userStats']['courses']); ?></h3>
+                    <p>Courses</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Recent Activity</h2>
+            <ul class="recent-activity">
+                <?php foreach ($adminData['recentActivity'] as $activity) : ?>
+                <li>
+                    <strong><?php echo htmlspecialchars($activity['timestamp']); ?>:</strong>
+                    <p><?php echo htmlspecialchars($activity['action']); ?></p>
+                </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p>© <?php echo date('Y'); ?> Mount Kenya University. All rights reserved.</p>
+        </div>
+    </div>
 </body>
 
 </html>
