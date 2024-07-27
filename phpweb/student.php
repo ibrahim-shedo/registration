@@ -129,6 +129,28 @@ $userData = [
         font-weight: bold;
         color: #007bff;
     }
+
+    .progress-bar {
+        background-color: #007bff;
+        height: 20px;
+        width: 0;
+        transition: width 0.5s;
+    }
+
+    .progress-container {
+        background-color: #e9ecef;
+        border-radius: 5px;
+        margin-top: 10px;
+        height: 20px;
+    }
+
+    .assignment-submit {
+        margin-top: 10px;
+    }
+
+    .assignment-submit input[type="file"] {
+        margin-bottom: 10px;
+    }
     </style>
 </head>
 
@@ -161,6 +183,17 @@ $userData = [
                         <li><?php echo htmlspecialchars($assignment); ?></li>
                         <?php endforeach; ?>
                     </ul>
+                    <div class="progress-container">
+                        <div class="progress-bar"
+                            style="width: <?php echo count($course['assignments']) / 3 * 100; ?>%;"></div>
+                    </div>
+                    <form class="assignment-submit" action="submit_assignment.php" method="post"
+                        enctype="multipart/form-data">
+                        <label for="assignment">Submit Assignment:</label>
+                        <input type="file" name="assignment" id="assignment" required>
+                        <input type="hidden" name="course" value="<?php echo htmlspecialchars($course['name']); ?>">
+                        <input type="submit" value="Upload">
+                    </form>
                     <p><strong>Grade:</strong> <span
                             class="grade"><?php echo htmlspecialchars($userData['grades'][$course['name']] ?? 'N/A'); ?></span>
                     </p>
@@ -176,6 +209,18 @@ $userData = [
             <p>© <?php echo date('Y'); ?> Mount Kenya University. All rights reserved.</p>
         </div>
     </div>
+
+    <script>
+    // Example of progress bar update (you may need to replace this logic with actual assignment completion data)
+    document.addEventListener('DOMContentLoaded', function() {
+        var progressBars = document.querySelectorAll('.progress-bar');
+        progressBars.forEach(function(bar) {
+            var assignmentsCompleted = bar.parentElement.previousElementSibling.children.length;
+            bar.style.width = (assignmentsCompleted / 3 * 100) +
+                '%'; // Assuming 3 assignments per course
+        });
+    });
+    </script>
 </body>
 
 </html>
