@@ -39,10 +39,8 @@ $adminData = [
     }
 
     .container {
-
         padding: 2%;
         background: #fff;
-
     }
 
     h1 {
@@ -123,6 +121,28 @@ $adminData = [
     .nav-links a:hover {
         text-decoration: underline;
     }
+
+    .notifications {
+        background: #e7f0ff;
+        padding: 15px;
+        border-radius: 4px;
+        margin-bottom: 20px;
+    }
+
+    .notifications h3 {
+        margin-top: 0;
+    }
+
+    .system-health {
+        background: #d4edda;
+        padding: 15px;
+        border-radius: 4px;
+        margin-bottom: 20px;
+    }
+
+    .system-health h3 {
+        margin-top: 0;
+    }
     </style>
 </head>
 
@@ -134,6 +154,17 @@ $adminData = [
             <a href="student.php">Student Page</a>
             <a href="lecturer.php">Lecturer Page</a>
 
+        </div>
+
+        <div class="notifications">
+            <h3>Notifications</h3>
+            <p>No new notifications.</p> <!-- Replace with actual notifications -->
+        </div>
+
+        <div class="system-health">
+            <h3>System Health</h3>
+            <p>Server Uptime: 99.99%</p>
+            <p>Errors: 0</p> <!-- Replace with actual system metrics -->
         </div>
 
         <div class="section">
